@@ -1,0 +1,13 @@
+{
+  "name": "@mingocoin/contracts",
+  "version": "0.1.0",
+  "dependencies": {
+    "zeppelin-solidity": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mingocoin/contracts.git"
+  },
+  "author": "Ryan Leckey <ryan@mingocoin.com>",
+  "license": "MIT"
+}
