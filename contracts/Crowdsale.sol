@@ -51,32 +51,32 @@ contract Crowdsale is MultiOwnable {
         cap = 8000000000000000000000000 / _eurToWei;
     }
 
-    // begin: Mon., Sep. 25, 2017 2:00:00 PM
-    uint256 constant TIME_BEGIN = 1506348000;
+    // begin: Mon., Sep. 25, 2017 3:00:00 PM
+    uint256 constant TIME_BEGIN = 1508943600;
     function rate() returns (uint256) {
         if (now < (TIME_BEGIN + 1 hours)) {
-            // 1h: Mon., Sep. 25, 2017 3:00:00 PM
+            // 1h: Mon., Sep. 25, 2017 4:00:00 PM
             return 12500; // 60%
         } else if (now < (TIME_BEGIN + 1 days)) {
-            // 1d: Thu., Sep. 26, 2017 2:00:00 PM
+            // 1d: Thu., Sep. 26, 2017 3:00:00 PM
             return 10000; // 50%
         } else if (now < (TIME_BEGIN + 3 days)) {
-            // 3d: Thu., Sep. 28, 2017 2:00:00 PM
+            // 3d: Thu., Sep. 28, 2017 3:00:00 PM
             return 8333; // 40%
         } else if (now < (TIME_BEGIN + 4 days)) {
-            // 4d: Fri., Sep. 29, 2017 2:00:00 PM
+            // 4d: Fri., Sep. 29, 2017 3:00:00 PM
             return 7692; // 35%
         } else if (now < (TIME_BEGIN + 5 days)) {
-            // 5d: Sat., Sep. 30, 2017 2:00:00 PM
+            // 5d: Sat., Sep. 30, 2017 3:00:00 PM
             return 7143; // 30%
         } else if (now < (TIME_BEGIN + 6 days)) {
-            // 6d: Sun., Oct.  1, 2017 2:00:00 PM
+            // 6d: Sun., Oct.  1, 2017 3:00:00 PM
             return 6849; // 27%
         } else if (now < (TIME_BEGIN + 7 days)) {
-            // 7d: Mon., Oct.  2, 2017 2:00:00 PM
+            // 7d: Mon., Oct.  2, 2017 3:00:00 PM
             return 6579; // 24%
         } else if (now < (TIME_BEGIN + 8 days)) {
-            // 8d: Tue., Oct.  3, 2017 2:00:00 PM
+            // 8d: Tue., Oct.  3, 2017 3:00:00 PM
             return 6410; // 22%
         } else {
             // 9d+
