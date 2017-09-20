@@ -8,6 +8,10 @@ import './MultiOwnable.sol';
 contract Crowdsale is MultiOwnable {
     using SafeMath for uint256;
 
+    // Record contributors
+    mapping (address => bool) contributors;
+    uint256 contributorCount;
+
     // The token being sold
     MintableToken public token;
 
@@ -52,7 +56,7 @@ contract Crowdsale is MultiOwnable {
     }
 
     // begin: Mon., Sep. 25, 2017 3:00:00 PM
-    uint256 constant TIME_BEGIN = 1508943600;
+    uint256 constant TIME_BEGIN = 1506351600;
     function rate() returns (uint256) {
         if (now < (TIME_BEGIN + 1 hours)) {
             // 1h: Mon., Sep. 25, 2017 4:00:00 PM
@@ -112,6 +116,16 @@ contract Crowdsale is MultiOwnable {
         );
 
         wallet.transfer(amount);
+
+        if (!contributors[beneficiary]) {
+          contributors[beneficiary] = true;
+          contributorCount += 1;
+        }
+    }
+
+    // Get number of contributors
+    function numberOfContributors() returns (uint256) {
+      return contributorCount;
     }
 
     // https://github.com/OpenZeppelin/zeppelin-solidity/blob/1737555b0dda2974a0cd3a46bdfc3fb9f5b561b9/contracts/crowdsale/FinalizableCrowdsale.sol#L23
