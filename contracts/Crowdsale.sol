@@ -1,10 +1,78 @@
-pragma solidity ^0.4.16;
 pragma solidity ^0.4.13;
 
-import 'zeppelin-solidity/contracts/math/SafeMath.sol';
-import './MintableToken.sol';
-import './MultiOwnable.sol';
+/*import 'zeppelin-solidity/contracts/math/SafeMath.sol';*/
+library SafeMath {
+  function mul(uint256 a, uint256 b) internal constant returns (uint256) {
+    uint256 c = a * b;
+    assert(a == 0 || c / a == b);
+    return c;
+  }
 
+  function div(uint256 a, uint256 b) internal constant returns (uint256) {
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return c;
+  }
+
+  function sub(uint256 a, uint256 b) internal constant returns (uint256) {
+    assert(b <= a);
+    return a - b;
+  }
+
+  function add(uint256 a, uint256 b) internal constant returns (uint256) {
+    uint256 c = a + b;
+    assert(c >= a);
+    return c;
+  }
+}
+
+/*import './MintableToken.sol';*/
+contract MintableToken {
+  function mint(address _to, uint256 _amount) returns (bool);
+}
+
+/*import './MultiOwnable.sol';*/
+contract MultiOwnable {
+    mapping (address => bool) owners;
+
+    function MultiOwnable() {
+        // Add the sender of the contract as the initial owner
+        owners[msg.sender] = true;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owners[msg.sender]);
+        _;
+    }
+
+    /**
+     * @dev Adds an owner
+     */
+    function addOwner(address newOwner) onlyOwner {
+        // #0 is an invalid address
+        require(newOwner != address(0));
+
+        owners[newOwner] = true;
+    }
+
+    /**
+     * @dev Removes an owner
+     */
+    function removeOwner(address ownerToRemove) onlyOwner {
+        owners[ownerToRemove] = false;
+    }
+
+    /**
+     * @dev Checks if address is an owner
+     */
+    function isOwner(address possibleOwner) onlyOwner returns (bool) {
+        return owners[possibleOwner];
+    }
+}
 
 contract Crowdsale is MultiOwnable {
     using SafeMath for uint256;
